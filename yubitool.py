@@ -30,5 +30,5 @@ if len(sys.argv) <= 1:
 else:
     args = ""
     for x in range(1, len(sys.argv)):
-        args += " " + sys.argv[x]
+        args += sys.argv[x] + " "
     exec(args)
