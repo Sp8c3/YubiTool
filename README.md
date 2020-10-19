@@ -1,7 +1,7 @@
 # Prerequisites
 
  - Python3
- - [ykman](https://www.yubico.com/products/services-software/download/yubikey-manager)
+ - [ykman](https://github.com/Yubico/yubikey-manager)
 
 # Usage
 Just plug all the YubiKeys in and use the same Arguments as in ykman 
