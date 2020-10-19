@@ -4,7 +4,7 @@
  - [ykman](https://www.yubico.com/products/services-software/download/yubikey-manager)
 
 # Usage
-Just use the same Arguments as in ykman 
+Just plug all the YubiKeys in and use the same Arguments as in ykman 
 
     python3 ./yubitool.py <args>
 For Example:
