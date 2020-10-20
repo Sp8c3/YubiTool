@@ -27,6 +27,13 @@ def exec(string):
 if len(sys.argv) <= 1:
     pass
 
+elif((sys.argv[1] == 'oath') and (sys.argv[2] == 'uri')):
+    args = 'oath uri "' + sys.argv[3] + '" '
+    for x in range(4, len(sys.argv)):
+        args += sys.argv[x] + ' '
+    exec(args)
+
+
 else:
     args = ""
     for x in range(1, len(sys.argv)):
