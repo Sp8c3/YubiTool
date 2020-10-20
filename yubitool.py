@@ -15,13 +15,13 @@ os.system('ykman list')
 print('')
 
 
-def exec(string):
+def exec(args):
     for key in yubikeys:
-        print('ykman --device ' + key + ' ' + string)
+        print('ykman --device ' + key + ' ' + args)
     print('')
     for key in yubikeys:
-        print('ykman --device ' + key + ' ' + string)
-        stream = os.popen('ykman --device ' + key + ' ' + string)
+        print('ykman --device ' + key + ' ' + args)
+        stream = os.popen('ykman --device ' + key + ' ' + args)
         result = stream.read()
         print(result)
 
@@ -39,15 +39,18 @@ elif((sys.argv[1] == 'oath') and (sys.argv[2] == 'uri')):
 elif((sys.argv[1] == 'oath') and (sys.argv[2] == 'list')):
     ylistStream = os.popen('ykman list')
     ylist = ylistStream.read()
-    string = 'oath list'
     summary = ''
+
+    args = 'oath list '
+    for x in range(3, len(sys.argv)):
+        args += sys.argv[x] + ' '
     
     for key in yubikeys:
-        print('ykman --device ' + key + ' ' + string)
+        print('ykman --device ' + key + ' ' + args)
     print('')
     for key in yubikeys:
-        print('ykman --device ' + key + ' ' + string)
-        stream = os.popen('ykman --device ' + key + ' ' + string)
+        print('ykman --device ' + key + ' ' + args)
+        stream = os.popen('ykman --device ' + key + ' ' + args)
         result = stream.read()
         print(result)
 
