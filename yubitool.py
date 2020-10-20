@@ -1,41 +1,67 @@
 import os
 import sys
-path = ""
+path = ''
 
 yubikeys = []
 
-# Interactive: python3 -i yubitool.py
-
-ylistStream = os.popen("ykman list")
+ylistStream = os.popen('ykman list')
 ylist = ylistStream.read()
-while ylist.__contains__("\n"):
-    key = ylist[:ylist.find("\n")]
+while ylist.__contains__('\n'):
+    key = ylist[:ylist.find('\n')]
     ylist = ylist[len(key)+1:]
     keySerial = key[len(key)-8:]
     yubikeys.append(keySerial)
-print(yubikeys)
-print("")
+os.system('ykman list')
+print('')
 
 
 def exec(string):
     for key in yubikeys:
-        print("ykman --device " + key + " " + string)
-        stream = os.popen("ykman --device " + key + " " + string)
+        print('ykman --device ' + key + ' ' + string)
+    print('')
+    for key in yubikeys:
+        print('ykman --device ' + key + ' ' + string)
+        stream = os.popen('ykman --device ' + key + ' ' + string)
         result = stream.read()
         print(result)
 
 if len(sys.argv) <= 1:
     pass
 
+# ykman oath uri
 elif((sys.argv[1] == 'oath') and (sys.argv[2] == 'uri')):
     args = 'oath uri "' + sys.argv[3] + '" '
     for x in range(4, len(sys.argv)):
         args += sys.argv[x] + ' '
     exec(args)
 
+# ykam oath list
+elif((sys.argv[1] == 'oath') and (sys.argv[2] == 'list')):
+    ylistStream = os.popen('ykman list')
+    ylist = ylistStream.read()
+    string = 'oath list'
+    summary = ''
+    
+    for key in yubikeys:
+        print('ykman --device ' + key + ' ' + string)
+    print('')
+    for key in yubikeys:
+        print('ykman --device ' + key + ' ' + string)
+        stream = os.popen('ykman --device ' + key + ' ' + string)
+        result = stream.read()
+        print(result)
+
+        ylist = ylist[:ylist.find(key)+8] + ' : ' + str(result.count('\n')) + ylist[ylist.find(key)+8:]
+        
+        
+    print(ylist)
+
 
 else:
-    args = ""
+    args = ''
     for x in range(1, len(sys.argv)):
-        args += sys.argv[x] + " "
+        args += sys.argv[x] + ' '
     exec(args)
+
+
+
